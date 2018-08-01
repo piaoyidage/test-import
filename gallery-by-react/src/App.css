@@ -2,7 +2,7 @@
 * @Author: maoying.hu
 * @Date:   2018-08-01 15:16:14
 * @Last Modified by:   maoying.hu
-* @Last Modified time: 2018-08-01 15:24:24
+* @Last Modified time: 2018-08-01 16:02:23
 */
 
 html, body {
@@ -33,3 +33,27 @@ html, body {
   bottom: 30px;
 }
 
+.figure-wrap {
+  position: absolute;
+  margin: 0;
+  width: 360px;
+  height: 360px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #eee;
+  box-sizing: border-box;
+  /*border: 1px solid #888;*/
+}
+
+.figure-image {
+  width: 240px;
+  height: 240px;
+}
+
+.figure-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 20px;
+}
