@@ -2,7 +2,7 @@
 * @Author: maoying.hu
 * @Date:   2018-08-01 15:16:14
 * @Last Modified by:   maoying.hu
-* @Last Modified time: 2018-08-01 16:02:23
+* @Last Modified time: 2018-08-01 20:15:30
 */
 
 html, body {
@@ -23,8 +23,9 @@ html, body {
 }
 
 .image-area {
-  height: 680px;
+  height: 100%;
   position: relative;
+  overflow: hidden;
 }
 
 .controller {
