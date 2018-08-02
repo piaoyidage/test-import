@@ -19,13 +19,21 @@ function setImageUrl(imageArray) {
 imageData = setImageUrl(imageData)
 
 /**
- * [getRandomValue 获取 low 到 high 之间的随机整数]
+ * [getRandomRange 获取 low 到 high 之间的随机整数]
  * @param  {[type]} low  [description]
  * @param  {[type]} high [description]
  * @return {[type]}      [description]
  */
-function getRandomValue(low, high) {
+function getRandomRange(low, high) {
     return Math.ceil(low + Math.random() * (high - low))
+}
+
+/**
+ * [getRandom30Deg 获取 -30 到 30 之间的随机数]
+ * @return {[type]} [description]
+ */
+function getRandom30Deg() {
+    return Math.ceil((Math.random() > 0.5 ? 1 : -1) * Math.random() * 30)
 }
 
 /**
@@ -33,10 +41,11 @@ function getRandomValue(low, high) {
  */
 class ImageFigure extends Component {
     render() {
-        const { data: { url, title }, position: { left, top } } = this.props
+        const { data: { url, title }, position: { left, top, rotate } } = this.props
         const positionStyle = {
             left,
             top,
+            transform: `rotate(${rotate}deg)`,
         }
         return (
             <figure className="figure-wrap" style={positionStyle}>
@@ -126,24 +135,28 @@ class Gallery extends Component {
         const centerImages = cloneArr.splice(centerIndex, 1)
         centerImages[0].left = centerSection.x[0]
         centerImages[0].top = centerSection.y[0]
+        centerImages[0].rotate = 0
 
         // 上边图片
         // 数量随机0或者1
         const topIndex = Math.floor(Math.random() * (cloneArr.length - 1))
         const topImages = cloneArr.splice(topIndex, Math.ceil(Math.random() * 2) - 1)
         topImages.forEach((item, index) => {
-            item.left = getRandomValue(topSection.x[0], topSection.x[1])
-            item.top = getRandomValue(topSection.y[0], topSection.y[1])
+            item.left = getRandomRange(topSection.x[0], topSection.x[1])
+            item.top = getRandomRange(topSection.y[0], topSection.y[1])
+            item.rotate = getRandom30Deg()
         })
 
         // 左右图片
         for (let i = 0, len = cloneArr.length, half = len / 2; i < len; i += 1) {
             if (i < half) {
-                cloneArr[i].left = getRandomValue(leftSection.x[0], leftSection.x[1])
-                cloneArr[i].top = getRandomValue(leftSection.y[0], leftSection.y[1])
+                cloneArr[i].left = getRandomRange(leftSection.x[0], leftSection.x[1])
+                cloneArr[i].top = getRandomRange(leftSection.y[0], leftSection.y[1])
+                cloneArr[i].rotate = getRandom30Deg()
             } else {
-                cloneArr[i].left = getRandomValue(rightSection.x[0], rightSection.x[1])
-                cloneArr[i].top = getRandomValue(rightSection.y[0], rightSection.y[1])
+                cloneArr[i].left = getRandomRange(rightSection.x[0], rightSection.x[1])
+                cloneArr[i].top = getRandomRange(rightSection.y[0], rightSection.y[1])
+                cloneArr[i].rotate = getRandom30Deg()
             }
         }
 
@@ -152,7 +165,7 @@ class Gallery extends Component {
         }
 
         cloneArr.splice(centerIndex, 0, centerImages[0])
-        
+
         this.setState({
             imagePositionArr: cloneArr,
         })
@@ -166,7 +179,7 @@ class Gallery extends Component {
 
         imageData.forEach((item, index) => {
             if (!imagePositionArr[index]) {
-                imagePositionArr[index] = { left: 0, top: 0 }
+                imagePositionArr[index] = { left: 0, top: 0, rotate: 0 }
             }
             imageFigures.push(<ImageFigure key={item.url} data={item} ref={`imageFigures${index}`} position={imagePositionArr[index]} />)
         })
