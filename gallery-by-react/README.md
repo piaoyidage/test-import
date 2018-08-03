@@ -81,6 +81,15 @@ b[0].value = 10
 **用对象去初始化数组，所有的数组元素都指向这个对象，改变数组一个元素，影响所有的数组元素。**
 
 
+### 打包
+
+打包之后把 build 文件下的内容拷贝到 Learning-Journey-React/docs 下，将打包后静态资源前面加上 Learning-Journey-React，然后在 github 的 setting 里面设置如下：
+
+![](./images/1.png)
+
+访问 [图片画廊](http://piaoyidage.github.com/Learning-Journey-React/)
+
+
 
 
 
