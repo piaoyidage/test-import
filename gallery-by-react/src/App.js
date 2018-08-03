@@ -93,21 +93,15 @@ class Controller extends Component {
     }
     render() {
         const { inverse, center } = this.props.info
-        let centerStyle = {}
+        let classNames = 'control-unit'
         if (center) {
-            centerStyle = {
-                backgroundColor: '#888',
-                transform: 'scale(1)'
-            }
+            classNames += ' is-center'
         }
+        let centerStyle = {}
         if (inverse) {
-            centerStyle.backgroundColor = 'red'   
+            centerStyle.transform = 'rotateY(180deg)'
         }
-        return (
-            <div className="control-unit" style={centerStyle} onClick={this.handleClick}>
-                
-            </div>
-        )
+        return <span className={classNames} style={centerStyle} onClick={this.handleClick} />
     }
 }
 

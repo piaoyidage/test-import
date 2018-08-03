@@ -2,8 +2,17 @@
 * @Author: maoying.hu
 * @Date:   2018-08-01 15:16:14
 * @Last Modified by:   maoying.hu
-* @Last Modified time: 2018-08-03 14:15:59
+* @Last Modified time: 2018-08-03 17:16:40
 */
+
+@font-face {
+    font-family: 'turn-arrow';
+    src: url('./font/icon/iconfont.eot');
+    src: url('./font/icon/iconfont.eot?#iefix') format('embedded-opentype'),
+    url('./font/icon/iconfont.woff') format('woff'),
+    url('./font/icon/iconfont.ttf') format('truetype'),
+    url('./font/icon/iconfont.svg#iconfont') format('svg');
+}
 
 html, body {
   height: 100%;
@@ -86,11 +95,29 @@ html, body {
 .control-unit {
   width: 30px;
   height: 30px;
+  line-height: 30px;
+  text-align: center;
   border-radius: 50%;
   background-color: #aaa;
   margin: 0 5px;
   transform: scale(.5);
   cursor: pointer;
+  transition: transform .6s ease-in-out, background-color 0.3s;
+}
+
+.is-center {
+  background-color: #888;
+  transform: scale(1);
+}
+
+.is-center::after {
+  font-family: "turn-arrow" !important;
+  font-size: 16px;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\e6b4";
 }
 
 
