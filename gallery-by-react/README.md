@@ -60,12 +60,25 @@
 	top: 0px;
 	height: 100%;
 	width: 100%;
+	background-color: #fff;
 	transform: rotateY(180deg);
 	/* 其他 */
 
 }
 ```
 
+### Array.prototype.fill
+
+需要注意下面这种用法：
+
+```js
+const a = Array(2).fill({ value: 0 })
+const b = a.splice(0, 1)
+b[0].value = 10
+// 此时 a  = [{ value: 10 }] 而不是 [{ value: 0 }]
+```
+
+**用对象去初始化数组，所有的数组元素都指向这个对象，改变数组一个元素，影响所有的数组元素。**
 
 
 

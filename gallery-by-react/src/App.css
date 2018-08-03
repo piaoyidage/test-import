@@ -2,7 +2,7 @@
 * @Author: maoying.hu
 * @Date:   2018-08-01 15:16:14
 * @Last Modified by:   maoying.hu
-* @Last Modified time: 2018-08-02 18:54:13
+* @Last Modified time: 2018-08-03 11:21:33
 */
 
 html, body {
@@ -43,6 +43,7 @@ html, body {
 
   transform-origin: 0 0 0;
   transform-style: preserve-3d;
+  transition: transform .6s ease-in-out, left .6s ease-in-out, top .6s ease-in-out;
 }
 
 .is-inverse {

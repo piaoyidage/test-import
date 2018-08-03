@@ -40,8 +40,16 @@ function getRandom30Deg() {
  * 单个图片
  */
 class ImageFigure extends Component {
+    handleClick = () => {
+        const { handleInverse, handleCenter, info: { center } } = this.props
+        if (!center) {
+            handleCenter()
+        } else {
+            handleInverse()
+        }
+    }
     render() {
-        const { data: { url, title, desc }, info: { left, top, rotate, inverse } } = this.props
+        const { data: { url, title, desc }, info: { left, top, rotate, inverse, center } } = this.props
         const positionStyle = {
             left,
             top,
@@ -50,12 +58,16 @@ class ImageFigure extends Component {
         if (rotate) {
             positionStyle.transform = `rotate(${rotate}deg)`
         }
+        // 防止中心图片被遮挡
+        if (center) {
+            positionStyle.zIndex = 11
+        }
         let classNames = 'figure-wrap'
         if (inverse) {
             classNames += ' is-inverse'
         }
         return (
-            <figure className={classNames} style={positionStyle}>
+            <figure className={classNames} style={positionStyle} onClick={this.handleClick}>
                 <img className="figure-image" src={url} alt={title} />
                 <figcaption>
                     <div className="figure-title">{title}</div>
@@ -134,6 +146,18 @@ class Gallery extends Component {
         this.rearrange(0)
     }
 
+    // 图片翻转
+    handleInverse = index => () => {
+        const cloneArr = cloneDeep(this.state.imagePositionArr)
+        cloneArr[index].inverse = !cloneArr[index].inverse
+        this.setState({
+            imagePositionArr: cloneArr,
+        })
+    }
+
+    // 将图片放置到中间
+    handleCenter = index => () => this.rearrange(index)
+
     rearrange = centerIndex => {
         const { leftSection, rightSection, topSection, centerSection } = this.rangeSection
         const { imagePositionArr } = this.state
@@ -144,7 +168,7 @@ class Gallery extends Component {
         centerImages[0].left = centerSection.x[0]
         centerImages[0].top = centerSection.y[0]
         centerImages[0].rotate = 0
-        centerImages[0].inverse = true
+        centerImages[0].center = true
 
         // 上边图片
         // 数量随机0或者1
@@ -154,6 +178,7 @@ class Gallery extends Component {
             item.left = getRandomRange(topSection.x[0], topSection.x[1])
             item.top = getRandomRange(topSection.y[0], topSection.y[1])
             item.rotate = getRandom30Deg()
+            item.center = false
         })
 
         // 左右图片
@@ -162,10 +187,12 @@ class Gallery extends Component {
                 cloneArr[i].left = getRandomRange(leftSection.x[0], leftSection.x[1])
                 cloneArr[i].top = getRandomRange(leftSection.y[0], leftSection.y[1])
                 cloneArr[i].rotate = getRandom30Deg()
+                cloneArr[i].center = false
             } else {
                 cloneArr[i].left = getRandomRange(rightSection.x[0], rightSection.x[1])
                 cloneArr[i].top = getRandomRange(rightSection.y[0], rightSection.y[1])
                 cloneArr[i].rotate = getRandom30Deg()
+                cloneArr[i].center = false
             }
         }
 
@@ -174,6 +201,8 @@ class Gallery extends Component {
         }
 
         cloneArr.splice(centerIndex, 0, centerImages[0])
+        // 居中后，所有图片翻转状态重置
+        cloneArr.forEach(item => item.inverse = false)
 
         this.setState({
             imagePositionArr: cloneArr,
@@ -188,9 +217,9 @@ class Gallery extends Component {
 
         imageData.forEach((item, index) => {
             if (!imagePositionArr[index]) {
-                imagePositionArr[index] = { left: 0, top: 0, rotate: 0, inverse: false }
+                imagePositionArr[index] = { left: 0, top: 0, rotate: 0, inverse: false, center: false }
             }
-            imageFigures.push(<ImageFigure key={item.url} data={item} ref={`imageFigures${index}`} info={imagePositionArr[index]} />)
+            imageFigures.push(<ImageFigure key={item.url} data={item} ref={`imageFigures${index}`} info={imagePositionArr[index]} handleInverse={this.handleInverse(index)} handleCenter={this.handleCenter(index)} />)
         })
 
         return (
