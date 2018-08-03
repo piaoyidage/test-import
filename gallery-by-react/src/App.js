@@ -41,17 +41,25 @@ function getRandom30Deg() {
  */
 class ImageFigure extends Component {
     render() {
-        const { data: { url, title }, position: { left, top, rotate } } = this.props
+        const { data: { url, title, desc }, info: { left, top, rotate, inverse } } = this.props
         const positionStyle = {
             left,
             top,
-            transform: `rotate(${rotate}deg)`,
+        }
+        // 如果旋转角度不为0，设置旋转角度（中心图片没有旋转角度）
+        if (rotate) {
+            positionStyle.transform = `rotate(${rotate}deg)`
+        }
+        let classNames = 'figure-wrap'
+        if (inverse) {
+            classNames += ' is-inverse'
         }
         return (
-            <figure className="figure-wrap" style={positionStyle}>
+            <figure className={classNames} style={positionStyle}>
                 <img className="figure-image" src={url} alt={title} />
-                <figcaption className="figure-title">
-                    {title}
+                <figcaption>
+                    <div className="figure-title">{title}</div>
+                    <div className="figure-desc">{desc}</div>
                 </figcaption>
             </figure>
         )
@@ -136,6 +144,7 @@ class Gallery extends Component {
         centerImages[0].left = centerSection.x[0]
         centerImages[0].top = centerSection.y[0]
         centerImages[0].rotate = 0
+        centerImages[0].inverse = true
 
         // 上边图片
         // 数量随机0或者1
@@ -179,9 +188,9 @@ class Gallery extends Component {
 
         imageData.forEach((item, index) => {
             if (!imagePositionArr[index]) {
-                imagePositionArr[index] = { left: 0, top: 0, rotate: 0 }
+                imagePositionArr[index] = { left: 0, top: 0, rotate: 0, inverse: false }
             }
-            imageFigures.push(<ImageFigure key={item.url} data={item} ref={`imageFigures${index}`} position={imagePositionArr[index]} />)
+            imageFigures.push(<ImageFigure key={item.url} data={item} ref={`imageFigures${index}`} info={imagePositionArr[index]} />)
         })
 
         return (
