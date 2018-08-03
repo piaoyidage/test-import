@@ -79,6 +79,39 @@ class ImageFigure extends Component {
 }
 
 /**
+ * 控制组件
+ */
+class Controller extends Component {
+    handleClick = () => {
+        const { info: { inverse, center }, handleInverse, handleCenter } = this.props
+        if (center) {
+            handleInverse()
+        } else {
+            handleCenter()
+        }
+
+    }
+    render() {
+        const { inverse, center } = this.props.info
+        let centerStyle = {}
+        if (center) {
+            centerStyle = {
+                backgroundColor: '#888',
+                transform: 'scale(1)'
+            }
+        }
+        if (inverse) {
+            centerStyle.backgroundColor = 'red'   
+        }
+        return (
+            <div className="control-unit" style={centerStyle} onClick={this.handleClick}>
+                
+            </div>
+        )
+    }
+}
+
+/**
  * 图片画廊
  */
 class Gallery extends Component {
@@ -220,6 +253,7 @@ class Gallery extends Component {
                 imagePositionArr[index] = { left: 0, top: 0, rotate: 0, inverse: false, center: false }
             }
             imageFigures.push(<ImageFigure key={item.url} data={item} ref={`imageFigures${index}`} info={imagePositionArr[index]} handleInverse={this.handleInverse(index)} handleCenter={this.handleCenter(index)} />)
+            controllerUnits.push(<Controller info={imagePositionArr[index]}  handleInverse={this.handleInverse(index)} handleCenter={this.handleCenter(index)} />)
         })
 
         return (

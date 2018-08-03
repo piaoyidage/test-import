@@ -2,13 +2,13 @@
 * @Author: maoying.hu
 * @Date:   2018-08-01 15:16:14
 * @Last Modified by:   maoying.hu
-* @Last Modified time: 2018-08-03 11:21:33
+* @Last Modified time: 2018-08-03 14:15:59
 */
 
 html, body {
   height: 100%;
   width: 100%;
-  background-color: #888;
+  background-color: #ddd;
 }
 
 .root {
@@ -18,7 +18,7 @@ html, body {
 
 .stage {
   width: 100%;
-  height: 100%;
+  height: 800px;
   position: relative;
 }
 
@@ -40,6 +40,7 @@ html, body {
   align-items: center;
   background-color: #eee;
   box-sizing: border-box;
+  cursor: pointer;
 
   transform-origin: 0 0 0;
   transform-style: preserve-3d;
@@ -74,9 +75,25 @@ html, body {
 
 .controller {
   position: absolute;
-  left: 0;
   bottom: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 111
 }
+
+.control-unit {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #aaa;
+  margin: 0 5px;
+  transform: scale(.5);
+  cursor: pointer;
+}
+
+
 
 
 
