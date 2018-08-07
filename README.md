@@ -83,11 +83,11 @@ b[0].value = 10
 
 ### 打包
 
-打包之后把 build 文件下的内容拷贝到 Learning-Journey-React/docs 下，将打包后静态资源前面加上 Learning-Journey-React，然后在 github 的 setting 里面设置如下：
+使用 `npm run build` 打包，然后执行 `git subtree push --prefix=build origin gh-pages`，将 build 文件夹下的内容推送到 gh-pages 分支，最后在 github 按照如下设置：
 
-![](./images/1.png)
+![gh-pages](./images/gh-pages.png)
 
-访问 [图片画廊](http://piaoyidage.github.com/Learning-Journey-React/)
+访问 [图片画廊](http://piaoyidage.github.com/gallery-by-react/)
 
 
 
