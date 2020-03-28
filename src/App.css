@@ -1,8 +1,8 @@
 /*
 * @Author: maoying.hu
 * @Date:   2018-08-01 15:16:14
-* @Last Modified by:   maoying.hu
-* @Last Modified time: 2018-08-03 17:16:40
+ * @Last Modified by: maoying.hu
+ * @Last Modified time: 2020-03-28 22:25:04
 */
 
 @font-face {
@@ -77,7 +77,7 @@ html, body {
   top: 0;
   height: 100%;
   width: 100%;
-  transform: rotateY(180deg);
+  transform: rotateY(180deg) translateZ(1px);
   background-color: #fff;
 }
 
@@ -119,8 +119,3 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
   content: "\e6b4";
 }
-
-
-
-
-

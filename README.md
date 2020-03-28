@@ -61,7 +61,8 @@
 	height: 100%;
 	width: 100%;
 	background-color: #fff;
-	transform: rotateY(180deg);
+  	transform: rotateY(180deg) translateZ(1px);
+
 	/* 其他 */
 
 }
@@ -88,10 +89,3 @@ b[0].value = 10
 ![gh-pages](./images/gh-pages.png)
 
 访问 [图片画廊](http://piaoyidage.github.com/gallery-by-react/)
-
-
-
-
-
-
-

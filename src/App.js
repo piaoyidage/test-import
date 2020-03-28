@@ -83,7 +83,7 @@ class ImageFigure extends Component {
  */
 class Controller extends Component {
     handleClick = () => {
-        const { info: { inverse, center }, handleInverse, handleCenter } = this.props
+        const { info: { center }, handleInverse, handleCenter } = this.props
         if (center) {
             handleInverse()
         } else {
@@ -247,7 +247,7 @@ class Gallery extends Component {
                 imagePositionArr[index] = { left: 0, top: 0, rotate: 0, inverse: false, center: false }
             }
             imageFigures.push(<ImageFigure key={item.url} data={item} ref={`imageFigures${index}`} info={imagePositionArr[index]} handleInverse={this.handleInverse(index)} handleCenter={this.handleCenter(index)} />)
-            controllerUnits.push(<Controller info={imagePositionArr[index]}  handleInverse={this.handleInverse(index)} handleCenter={this.handleCenter(index)} />)
+            controllerUnits.push(<Controller key={item.url} info={imagePositionArr[index]}  handleInverse={this.handleInverse(index)} handleCenter={this.handleCenter(index)} />)
         })
 
         return (
